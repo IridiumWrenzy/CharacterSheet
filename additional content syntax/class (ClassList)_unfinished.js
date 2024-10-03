@@ -76,7 +76,7 @@ RequiredSheetVersion("13.0.6");
 	or go to File >> Properties >> Description, where the version is part of the document title.
 */
 
-ClassList["purplemancer"] = {
+ClassList["wildwitch"] = {
 /* 	ClassList object name // REQUIRED //
 	TYPE:	string
 	USE:	object name of the class as it will be used by the sheet
@@ -86,12 +86,12 @@ ClassList["purplemancer"] = {
 	If you do use an object name that is already in use, you will be overwriting that object.
 	Note the use of only lower case! Also note the absence of the word "var" and the use of brackets [].
 */
-	name : "Purplemancer",
+	name : "Wild Witch",
 /*	name // REQUIRED //
 	TYPE:	string
 	USE:	name of the class as it will be used by the sheet
 */
-	regExpSearch : /^(?=.*purple)(?=.*mancer).*$/i,
+	regExpSearch : /^(?=.*wild)(?=.*witch).*$/i,
 /*	regExpSearch // REQUIRED //
 	TYPE:	regular expression
 	USE:	used to match the text in the class field to see if this class is present
@@ -143,7 +143,7 @@ ClassList["purplemancer"] = {
 
 	Setting this attribute to false is the same as not including this attribute.
 */
-	primaryAbility : "Strength or Dexterity",
+	primaryAbility : "Wisdom",
 /*	primaryAbility // REQUIRED //
 	TYPE:	string
 	USE:	abilities that are essential to the class to be displayed in the Ability Scores dialog
@@ -151,7 +151,7 @@ ClassList["purplemancer"] = {
 	If there are no essential abilities, just put an empty string:
 		primaryAbility : "",
 */
-	prereqs : "Strength 13 or Dexterity 13",
+	prereqs : "Wisdom 13",
 /*	prereqs // REQUIRED //
 	TYPE:	string
 	USE:	prerequisite abilities to multiclass in the class, to be displayed in the Ability Scores dialog when multiclassing
@@ -159,7 +159,7 @@ ClassList["purplemancer"] = {
 	If there are no prerequisite abilities, just put an empty string:
 		prereqs : "",
 */
-	die : 10,
+	die : 6,
 /*	die // REQUIRED //
 	TYPE:	number
 	USE:	number of the type of hit die the class has (i.e. 10 means d10)
@@ -175,7 +175,7 @@ ClassList["purplemancer"] = {
 	If the class doesn't get any improvements, just put the following:
 		improvements : [0],
 */
-	saves : ["Str", "Con"],
+	saves : ["Wis", "Int"],
 /*	improvements // OPTIONAL //
 	Array of the saving throw proficiencies the class gets, using the name of an ability.
 	You have to include at least the first three-letters of an ability, and capitalization doesn't matter.
@@ -188,34 +188,34 @@ ClassList["purplemancer"] = {
 
 /* SYNTAX CHANGE v12.998 >> old syntax for 'tools' and 'languages' are no longer supported!! */
 	toolProfs : { // optional; this is an object with arrays with the tool proficiencies gained. Each entry in an array can be its own array of 2 entries. The first entry is the name of the tool and the second entry is either 1) a number if the tool is yet to be chosen, or 2) the 3-letter ability score abbreviation if the tool is to be listed in the skill section and have a bonus calculated
-		primary : [["Musical instrument", 3], ["Thieves' tools", "Dex"]], // optional; the tool proficiencies gained if the class is the primary class (i.e. taken at 1st level)
-		secondary : [["Musical instrument", 1]] // optional; the tool proficiencies gained if the class is not the primary class (i.e. taken at a later level)
+		primary : [["Herbalism Kit"], ["Alchemist's Supplies", "Int"]], // optional; the tool proficiencies gained if the class is the primary class (i.e. taken at 1st level)
+		secondary : [["Herbalism Kit"]] // optional; the tool proficiencies gained if the class is not the primary class (i.e. taken at a later level)
 	},
 
 	armor : [ //required; the 4 entries are for: ["light", "medium", "heavy", "shields"]
-		[true, true, true, true], //required; the armor proficiencies if this is the first or only class
-		[true, true, false, true] //required; the armor proficiencies if this class is multiclassed with (so not taken at level 1, but later)
+		[false, false, false, false], //required; the armor proficiencies if this is the first or only class
+		[false, false, false, false] //required; the armor proficiencies if this class is multiclassed with (so not taken at level 1, but later)
 	],
 
 	weapons : [ //required; the 3 entries are for: ["simple", "martial", "other"]
-		[true, false, ["hand crossbow", "longsword", "rapier", "shortsword"]], //required; the weapon proficiencies if this is the first or only class
-		[true, false, ["hand crossbow"]] //required; the weapon proficiencies if this class is multiclassed with (so not taken at level 1, but later)
+		[true, false, false ["hand crossbow", "quarterstaff", "dagger"]], //required; the weapon proficiencies if this is the first or only class
+		[true, false, false ["hand crossbow"]] //required; the weapon proficiencies if this class is multiclassed with (so not taken at level 1, but later)
 	],
 
-	equipment : "MyClass starting equipment:\n \u2022 Chain mail -or- leather armor, a longbow, and 20 arrows;\n \u2022 A martial weapon and a shield -or- two martial weapons;\n \u2022 A light crossbow and 20 bolts -or- two handaxes;\n \u2022 A dungeoneer's pack -or- an explorer's pack.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.", //required; the text to display when citing the starting equipment
+	equipment : "MyClass starting equipment:\n \u2022 Cloak, a dagger, and 20 arrows;\n \u2022 A simple weapon;\n \u2022 A light crossbow and 20 bolts;\n \u2022 An Herbalism Kit -and- a scholar's pack.\n\nAlternatively, choose 5d4 \xD7 10 gp worth of starting equipment instead of both the class' and the background's starting equipment.", //required; the text to display when citing the starting equipment
 
 	subclasses : ["Martial Archetype", ["champion", "battle master", "eldritch knight", "purple dragon knight"]], //required; the names of the subclasses. The first entry is the overall name that is given to the subclasses, the second entry is a list of the subclass, using the exact names of the entry of the subclasses in the ClassSubList. //Note that if one of the entries in the array of subclasses doesn't exist in the ClassSubList, the sheet will throw an error as soon as you make a character with levels in this class
 	//IMPORTANT: for any subclass you add using the AddSubClass() function, don't list them here! The AddSubClass() function makes its own entry in this array! If you have entries here that don't exist (because you didn't add any ClassSubList entry, or added it using the AddSubClass() function, then the sheet will throw strange errors)!
 
 	prestigeClassPrereq : 5, //optional; if you include this attribute, the sheet will consider the class a prestige class // You can make this attribute a number, which represents the levels the character must have before being able to gain the prestige class. Alternatively, you can make this attribute a string, which can be evaluated with eval() and returns either true (prereqs met) or false (prereqs not met).
 
-	attacks : [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3], //required; the amount of attacks at each level. Note that there are 20 entries, one for each level.
+	attacks : [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], //required; the amount of attacks at each level. Note that there are 20 entries, one for each level.
 
-	abilitySave : 4, //optional, but required for a spellcaster; the ability score to use for the Ability Saving Throws. Remove this line if your class has no Ability that requires Saving Throws. (Str=1, Dex=2, Con=3, Int=4, Wis=5, Cha=6)
+	abilitySave : 5, //optional, but required for a spellcaster; the ability score to use for the Ability Saving Throws. Remove this line if your class has no Ability that requires Saving Throws. (Str=1, Dex=2, Con=3, Int=4, Wis=5, Cha=6)
 
-	abilitySaveAlt : 2,//optional; if the class offers a choice between two ability scores to be used to determine the DC, you can put that secondary one here (Str=1, Dex=2, Con=3, Int=4, Wis=5, Cha=6)
+	abilitySaveAlt : 4,//optional; if the class offers a choice between two ability scores to be used to determine the DC, you can put that secondary one here (Str=1, Dex=2, Con=3, Int=4, Wis=5, Cha=6)
 
-	spellcastingFactor : 3, //required for a spellcaster; the speed with which spell progression works type 1 for full spellcasting (Cleric), 2 for half spellcasting (Paladin), and 3 for one-third spellcasting (Arcane Trickster). This can be any positive number other than 0. Remove this line if your class has no spellcasting. If your character uses the Warlock way of spellcasting, write "warlock1" here. The 1 indicates the spell progression factor. You can change it to a 2 or 3 to have half or one-third spell progression (or to any other factor you like).
+	spellcastingFactor : 1, //required for a spellcaster; the speed with which spell progression works type 1 for full spellcasting (Cleric), 2 for half spellcasting (Paladin), and 3 for one-third spellcasting (Arcane Trickster). This can be any positive number other than 0. Remove this line if your class has no spellcasting. If your character uses the Warlock way of spellcasting, write "warlock1" here. The 1 indicates the spell progression factor. You can change it to a 2 or 3 to have half or one-third spell progression (or to any other factor you like).
 		// You can also have this refer to a Spell Slot progression you define yourself, as a separate variable (see "Homebrew Syntax - SpellTable.js"). In order to do this the name of that variable and the spellcastingFactor must match. Using the name "purplemancer" for example would mean that here you put [spellcastingFactor : "purplemancer1"] (the 1 is the factor, this can be any positive number other than 0) while for the variable containing the table you use "purplemancerSpellTable". Note that the name is all lower case!
 
 	spellcastingTable : [ //optional, only if you want to use a non-standard table for spell slot progression and just for this one (sub)class. You can either use the spellcastingTable attribute, or define a new SpellTable in a separate variable (see "Homebrew Syntax - SpellTable.js"). If you are adding multiple classes that use the same table, please add it as a separate variable, for otherwise the spell slots will be added up per individual class level instead of adding the class levels together to find the total amount of spell slots
@@ -255,11 +255,11 @@ ClassList["purplemancer"] = {
 
 	spellcastingList : { //Optional; Only needed if the class doesn't have its own spell list. This object denotes what spells the class has access to. All things in this object constrain the selection of spells that will be available. The contstraints are cumulative.
 
-		class : "wizard", //Required; The name of the class from whose spell list the spells come from. This can be "any" if the spells are not limited by a spell list of just one class. The entry has to match the name of the class in the SpellsList
+		class : "any", //Required; The name of the class from whose spell list the spells come from. This can be "any" if the spells are not limited by a spell list of just one class. The entry has to match the name of the class in the SpellsList
 
-		school : ["Evoc", "Abjur"], //Optional; An array of abbreviations of spell school names (see SpellsList). These have to be in an array, even if it is just one value. Each entry has to match the name of the spell school in the SpellsList
+		 //Optional; An array of abbreviations of spell school names (see SpellsList). These have to be in an array, even if it is just one value. Each entry has to match the name of the spell school in the SpellsList
 
-		level : [0, 4], //Optional; The lower and upper limit of spell levels that the class has access to.
+		level : [0, ], //Optional; The lower and upper limit of spell levels that the class has access to.
 
 		ritual : false, //Optional; Denotes if only ritual (true) or only non-ritual (false) spells should be included in the list
 
